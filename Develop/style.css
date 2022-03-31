@@ -33,8 +33,13 @@ textarea{
 .row {
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;;
+  border-top: 4px solid white;;
 }
+
+.yaya {
+  border-top: 2px solid white;
+}
+
 
 .hour {
   background-color: #ffffff;
@@ -65,7 +70,12 @@ textarea{
   color: white;
 }
 
-.saveBtn i:hover {
+.saveBtn .save:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+#currentDay {
+  font-size: 1.5rem;
+  line-height: 1.4;
 }
