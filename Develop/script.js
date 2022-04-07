@@ -1,4 +1,18 @@
 let inputEl = document.querySelector(".task-event")
+let nineAmEl = document.querySelector(".nine-am")
+let tenAmEl = document.querySelector(".ten-am")
+let elevenAmEl = document.querySelector(".eleven-am")
+let twelvePmEl = document.querySelector(".twelve-pm")
+let onePmEl = document.querySelector(".one-pm")
+let twoPmEl = document.querySelector(".two-pm")
+let threePmEl = document.querySelector(".three-pm")
+let fourPmEl = document.querySelector(".four-pm")
+let fivePmEl = document.querySelector(".five-pm")
+
+let timeBlocks =  [9, 10, 11, 12, 13, 14, 15, 16, 17]
+let timeBlocksRows = [nineAmEl, tenAmEl, elevenAmEl, twelvePmEl, onePmEl, twoPmEl, threePmEl, fourPmEl, fivePmEl];
+console.log(timeBlocks)
+
 // Time display in header
 const currentTime = moment().format('HH:mm A | MMM DD, YYYY');
 console.log(currentTime);
@@ -6,6 +20,27 @@ $("#currentDay").append("<p>" + currentTime + "</p>");
 
 masterTask = []
 var chosenTask = ""
+
+let checkTimeForTasks = function(timeParameter, thisRow) {
+    let thisTime = moment().hour()
+
+    for(let i = 0; i < timeBlocks.length; i++) {
+        let timeDiffence = timeParameter[i] - thisTime;
+        console.log(timeDiffence)
+
+        if(timeDiffence === 0) {
+            thisRow[i].classList.add("present")
+        }
+        else if(timeDiffence < 0) {
+            thisRow[i].classList.add("past")
+        }
+        else if(timeDiffence > 0) {
+            thisRow[i].classList.add("future")
+        }
+ 
+    }
+}
+checkTimeForTasks(timeBlocks, timeBlocksRows)
 
 
 // When user clicks save button
@@ -27,11 +62,13 @@ $(".saveBtn").click(function() {
     // push chosenTask into masterTask array
     masterTask.push(chosenTask)
     saveTask(masterTask)
-}) 
+
+})
+
+// Why does local storage clear when you edit a task????
 
 let saveTask = function(taskMonger) {
     localStorage.setItem("tasks", JSON.stringify(taskMonger))
-
 }
 
 let loadTasks = function() {    
@@ -44,64 +81,3 @@ let loadTasks = function() {
 
 loadTasks();
 
-// Target the input element sibling of the button that was clicked
-
-// Store the value of the input element into a variable
-
-// Push the value into the masterTask array?
-
-// Save the masterTask array into localStorage
-
-
-
-
-
-
-
-
-
-
-
-
-// // when input is clicked, user inputs their task
-// $(".saveBtn").click(function() {
-//     // Get sibling of the button that was clicked
-//     const taskInputField = $(this).siblings('.task-event');
-//     // Get ID of the siling
-//     const taskId = taskInputField.attr('id');
-//     console.log("taskId", taskId)
-//     // assign the input of ".task-event" to chosenTask
-//     chosenTask = taskInputField
-//         .val()
-//         .trim()
-//     if(chosenTask === "" || chosenTask === null) {
-//         alert("Please enter someting!")
-//     }
-//     else{
-//         masterTask.push({id: taskId, chosenTask})
-//         console.log(masterTask);
-//         saveTasks(masterTask)
-//     }
-
-// })
-
-// var saveTasks = function(tasks) {
-//     localStorage.setItem("work-tasks", JSON.stringify(tasks))
-// }
-// console.log(masterTask)
-
-// var loadTasks = function() {
-//     var tasks = JSON.parse(localStorage.getItem("work-tasks"));
-//         for (var i = 0; i < tasks.length; i++){
-//             $(`#${tasks[i].id}`).val(tasks[i].chosenTask)
-//         }
-//     // console.log('task', tasks)
-
-// }
-
-
-
-
-// save input field into localStorage
-
-// loadTasks();
