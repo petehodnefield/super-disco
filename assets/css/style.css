@@ -86,8 +86,7 @@ textarea{
 .red-background {
   background-color: red;
 }
-<<<<<<< HEAD:assets/css/style.css
-=======
+
 
 .btn-container {
   display: flex;
@@ -107,4 +106,4 @@ textarea{
   cursor: pointer;
   opacity: .9;
 }
->>>>>>> 5ac3530 (update):Develop/style.css
+
