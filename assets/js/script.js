@@ -1,5 +1,8 @@
+let clearBtn = document.querySelector(".clearBtn")
+
 let inputEl = document.querySelector(".task-event")
 let nineAmEl = document.querySelector(".nine-am")
+console.dir(nineAmEl)
 let tenAmEl = document.querySelector(".ten-am")
 let elevenAmEl = document.querySelector(".eleven-am")
 let twelvePmEl = document.querySelector(".twelve-pm")
@@ -18,6 +21,8 @@ const currentTime = moment().format('HH:mm A | MMM DD, YYYY');
 console.log(currentTime);
 $("#currentDay").append("<p>" + currentTime + "</p>");
 
+
+
 masterTask = []
 var chosenTask = ""
 
@@ -26,7 +31,6 @@ let checkTimeForTasks = function(timeParameter, thisRow) {
 
     for(let i = 0; i < timeBlocks.length; i++) {
         let timeDiffence = timeParameter[i] - thisTime;
-        console.log(timeDiffence)
 
         if(timeDiffence === 0) {
             thisRow[i].classList.add("present")
@@ -59,25 +63,41 @@ $(".saveBtn").click(function() {
         id: taskId
     }
 
+    // masterTask is getting cleared every new instance of button submit
+    
     // push chosenTask into masterTask array
     masterTask.push(chosenTask)
     saveTask(masterTask)
 
+
 })
 
-// Why does local storage clear when you edit a task????
+console.log(masterTask)
+
+
+let clearTasks = function() {
+    localStorage.clear();
+    // remove text from all input fields
+    for(let i = 0; i < timeBlocksRows.length; i++) {
+        timeBlocksRows[i].value = ''
+    }
+}
+
 
 let saveTask = function(taskMonger) {
     localStorage.setItem("tasks", JSON.stringify(taskMonger))
 }
+
+
 
 let loadTasks = function() {    
     var tasks = JSON.parse(localStorage.getItem("tasks"));
         for (var i = 0; i < tasks.length; i++){
             $(`#${tasks[i].id}`).val(tasks[i].name)
         }
-    // console.log(
+
 }
 
 loadTasks();
 
+clearBtn.addEventListener("click", clearTasks)
