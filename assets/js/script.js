@@ -21,7 +21,7 @@ $("#currentDay").append("<p>" + currentTime + "</p>");
 
 
 
-let masterTask = []
+let masterTask = JSON.parse(localStorage.getItem('tasks')) || [];
 var chosenTask = ""
 
 let checkTimeForTasks = function(timeParameter, thisRow) {
